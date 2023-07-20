@@ -66,5 +66,20 @@
 		</where>
 	</select>
 
+		<select id="selectWhere3" parameterType="map" resultType="Map">
+		<include refid="selectBoard" />
+		<where>
+			no = #{no}
+		</where>
+	</select>
+
+	<select id="selectNos" parameterType="int[]" resultMap="boardMap">
+		<include refid="selectBoard" />
+		where no in 
+			<foreach collection="array" item="bno" separator="," open="(" close=")">
+				#{bno}
+			</foreach>
+			
+	</select>
 
 </mapper>

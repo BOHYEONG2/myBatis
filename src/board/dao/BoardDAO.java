@@ -3,6 +3,7 @@ package board.dao;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -111,8 +112,36 @@ public class BoardDAO {
 		}
 	}
 	
+	public void selectWhere3() {
+		
+		Map<String, String> board = new HashMap<>();
+		board.put("no", "4");
+		
+		Map<String, Object> result = session.selectOne("board.dao.BoardDAO.selectWhere3", board);
+		
+		Set<String> keys = result.keySet();
+		for(String key : keys) {
+			System.out.println("key : " + key + ", value : " + result.get(key));
+		}
+		
+	}
+	
+	public void selectNos() {
+		int[] nos = {1, 3, 4, 5, 7, 10, 20, 21, 42};
+		
+		List<BoardVO> list = session.selectList("board.dao.BoardDAO.selectNos", nos);
+		
+		for(BoardVO b : list) {
+			System.out.println(b);
+		}
+		
+	}
+	
+	
 	public void work() {
-		selectWhere2();
+		selectNos();
+//		selectWhere3();
+//		selectWhere2();
 //		selectWhere();
 //		selectOne();
 //		select();
